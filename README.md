@@ -1,40 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Nylas v3 Scheduler!
 
-## Getting Started
+📖 See the [Next.js docs](https://nextjs.org/docs) for details on supported features for Next.js project.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node v20 or higher
+- Nylas Application (Client ID) see our [docs](https://developer.nylas.com/docs/v3/getting-started/scheduler/#set-up-your-nylas-account) for more information.
+- Nylas callback URI configured for `http://localhost:3000/scheduler-editor` see our [docs](https://developer.nylas.com/docs/v3/getting-started/scheduler/#register-callback-uri) for more information.
+- Create a `.env.development` file in the root of the project and add the following environment variables.
+    ```bash
+    NEXT_PUBLIC_NYLAS_CLIENT_ID=<YOUR_NYLAS_CLIENT_ID>
+    NEXT_PUBLIC_NYLAS_API_ENDPOINT=https://api.us.nylas.com/v3
+    ```
+## Running the project
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. First install all dependencies by running the following command in the root of the project.
+    ```bash
+    npm install
+    ```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+2. Start the development server by running the following command in the root of the project.
+    ```bash
+    npm run dev
+    ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+### Home Page
+The home page is the landing page of the application. It contains a button that redirects to the scheduler editor page.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+![Home Page](./figures/home.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Scheduler Editor Page
+The scheduler editor page is where you can create a new scheduling page and configure the event details.
 
-## Deploy on Vercel
+![Scheduler Editor Page](./figures/scheduler-editor.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Scheduling Page
+The scheduling page is where you can view the available time slots and select a time slot to schedule an event for a given scheduling page.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+![Scheduling Page](./figures/nylas-scheduling-page.png)
