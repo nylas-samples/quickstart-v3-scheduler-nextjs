@@ -1,6 +1,7 @@
 "use client";
-import { NylasSchedulerEditor } from "@nylas/react";
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function SchedulerEditor() {
   const [origin, setOrigin] = useState<string | null>(null);
@@ -14,7 +15,6 @@ export default function SchedulerEditor() {
   if (!origin) {
     return <div>Loading...</div>;
   }
-  console.log(process.env.NEXT_PUBLIC_NYLAS_API_ENDPOINT);
   const clientId = process.env.NEXT_PUBLIC_NYLAS_CLIENT_ID || "Your Client ID"; 
   const identitySettings = {
     clientId,
@@ -25,16 +25,39 @@ export default function SchedulerEditor() {
   };
 
   return (
-    <div className="flex gap-4 items-center flex-col sm:flex-row">
-    <NylasSchedulerEditor
-      schedulerPreviewLink={`${origin}?slug={slug}`}
-      nylasSessionsConfig={identitySettings}
-      defaultSchedulerConfigState={{
-        selectedConfiguration: {
-          requires_session_auth: false, // Creates a public configuration which doesn't require a session
-        },
-      }}
-    />
-  </div>
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-5xl space-y-6">
+        <header className="flex items-center justify-between">
+          <h1 className="text-xl font-medium">Scheduler Editor</h1>
+          <nav className="flex gap-4 text-sm">
+            <Link href="/">Home</Link>
+          </nav>
+        </header>
+        <style jsx global>{`
+          nylas-scheduler-editor { display: block; width: 100%; max-width: 100%; }
+        `}</style>
+        <div className="border rounded-lg overflow-hidden">
+          <DynamicNylasSchedulerEditor
+            schedulerPreviewLink={`${origin}/{slug}`}
+            nylasSessionsConfig={identitySettings}
+            requiresSlug={true}
+            defaultSchedulerConfigState={{
+              selectedConfiguration: {
+                requires_session_auth: false,
+                scheduler: {
+                  rescheduling_url: `${origin}/booking-ref/:booking_ref/reschedule`,
+                  cancellation_url: `${origin}/booking-ref/:booking_ref/cancel`,
+                },
+              },
+            }}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
+
+const DynamicNylasSchedulerEditor = dynamic(
+  () => import("@nylas/react").then((m) => m.NylasSchedulerEditor),
+  { ssr: false }
+);

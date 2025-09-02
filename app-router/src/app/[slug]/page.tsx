@@ -1,15 +1,12 @@
-"use client";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-const DynamicNylasScheduling = dynamic(
-  () => import("@nylas/react").then((m) => m.NylasScheduling),
-  { ssr: false }
-);
+import ClientScheduling from "./ClientScheduling";
 
-export default function SchedulingPage() {
-  const searchParams = useSearchParams();
-  const slug = searchParams.get("slug");
+export default async function SchedulingBySlugPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const clientId = process.env.NEXT_PUBLIC_NYLAS_CLIENT_ID || "Your Client ID";
   const schedulerApiUrl = (process.env.NEXT_PUBLIC_NYLAS_API_ENDPOINT || "https://api.us.nylas.com/v3").replace("/v3", "");
 
@@ -24,16 +21,11 @@ export default function SchedulingPage() {
           </nav>
         </header>
         <div className="border rounded-lg p-4">
-          {!slug && (
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Add a <code>slug</code> query param to see the Nylas Scheduler in action.
-            </p>
-          )}
-          {slug && (
-            <DynamicNylasScheduling clientId={clientId} schedulerApiUrl={schedulerApiUrl} slug={slug} />
-          )}
+          <ClientScheduling slug={slug} clientId={clientId} schedulerApiUrl={schedulerApiUrl} />
         </div>
       </div>
     </div>
   );
 }
+
+

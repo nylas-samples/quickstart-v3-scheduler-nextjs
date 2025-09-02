@@ -1,30 +1,29 @@
 "use client";
+import Link from "next/link";
 
-import Image from "next/image";
-import SchedulingPage from "./scheduling-page/page";
 export default function Home() {
-  // State to hold the window origin once available
-
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <SchedulingPage />
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="/scheduler-editor"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to scheduler editor →
-        </a>
-      </main>
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-3xl space-y-6">
+        <header className="flex items-center justify-between">
+          <h1 className="text-xl font-medium">Nylas Scheduler</h1>
+          <nav className="flex gap-4 text-sm">
+            <Link href="/">Home</Link>
+            <Link href="/scheduler-editor">Scheduler Editor</Link>
+          </nav>
+        </header>
+        <main className="space-y-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Visit <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded">/your-scheduler-slug</code> to open the booking page,
+            or go to the Scheduler Editor to create or edit a configuration.
+          </p>
+          <div>
+            <Link className="inline-flex items-center gap-2 rounded border px-3 py-2 text-sm" href="/scheduler-editor">
+              Open Scheduler Editor
+            </Link>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
