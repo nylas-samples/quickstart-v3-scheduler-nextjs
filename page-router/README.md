@@ -1,7 +1,6 @@
-# Nylas v3 Scheduler!
+## Next.js Scheduler with Pages Router
 
-📖 See the [Next.js docs](https://nextjs.org/docs) for details on supported features for Next.js project.
-
+This sample shows how to integrate Nylas Scheduler in a Next.js Pages Router app using the same minimal UI as the App Router version.
 
 ## Prerequisites
 
@@ -25,22 +24,29 @@
     npm run dev
     ```
 
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000).
 
+## Screenshots
 
-## Pages
+Home
 
-### Home Page
-The home page is the landing page of the application. It contains a button that redirects to the scheduler editor page.
+![Home](../figures/home.png)
 
-![Home Page](./figures/home.png)
+Scheduler Editor
 
-### Scheduler Editor Page
-The scheduler editor page is where you can create a new scheduling page and configure the event details.
+![Scheduler Editor](../figures/scheduler-editor.png)
 
-![Scheduler Editor Page](./figures/scheduler-editor.png)
+Scheduling Page
 
-### Scheduling Page
-The scheduling page is where you can view the available time slots and select a time slot to schedule an event for a given scheduling page.
+![Scheduling Page](../figures/nylas-scheduling-page.png)
 
-![Scheduling Page](./figures/nylas-scheduling-page.png)
+## Routes
+
+- Home: `/`
+- Scheduler Editor: `/scheduler-editor`
+- Scheduling Page by slug: `/[slug]`
+- Manage booking by reference: `/booking-ref/[bookingRef]/cancel` and `/booking-ref/[bookingRef]/reschedule`
+
+### Notes
+
+- Nylas UI components are dynamically imported with SSR disabled.

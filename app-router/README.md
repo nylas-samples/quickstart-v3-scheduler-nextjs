@@ -1,6 +1,6 @@
-# Next.js Scheduler with App Router
+## Next.js Scheduler with App Router
 
-This project demonstrates how to integrate the Nylas Scheduler component within a Next.js application using the App Router architecture.
+This sample shows how to integrate Nylas Scheduler in a Next.js App Router app using a clean, minimal UI.
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ npm run build
 pnpm build
 ```
 
-3. Start the development server:
+3. Start the development server (Turbopack enabled):
 
 ```bash
 npm run dev
@@ -55,23 +55,33 @@ npm run dev
 pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the scheduler.
+4. Open [http://localhost:3000](http://localhost:3000).
 
-## Usage
+## Screenshots
 
-The main scheduler components are located in:
-- Scheduling page: `src/app/scheduling-page/page.tsx`
-- Scheduler editor: `src/app/scheduler-editor/page.tsx`. 
+Home
 
-You can modify these files to customize the scheduler configuration and appearance.
+![Home](../figures/home.png)
 
-### Using Query Parameters
+Scheduler Editor
 
-The scheduling page supports the following query parameters:
+![Scheduler Editor](../figures/scheduler-editor.png)
 
-- `slug`: The unique identifier for a scheduler configuration. Example: `http://localhost:3000/scheduling-page?slug=your-scheduler-config-id`
+Scheduling Page
 
-If no slug is provided, the application will use a default value `test`.
+![Scheduling Page](../figures/nylas-scheduling-page.png)
+
+### Routes
+
+- Home: `/`
+- Scheduler Editor: `/scheduler-editor`
+- Scheduling Page by slug: `/{slug}` or `/scheduling-page?slug=...`
+- Manage booking by reference: `/booking-ref/{bookingRef}/cancel` and `/booking-ref/{bookingRef}/reschedule`
+
+### Notes
+
+- Nylas UI components are rendered client-side only via dynamic imports.
+- The Scheduler Editor preview links point to `/{slug}`; email callbacks use the `booking-ref` routes above.
 
 ## Documentation
 
